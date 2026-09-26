@@ -83,6 +83,7 @@ function wireNavigation() {
   document.getElementById('ctaBtn').addEventListener('click', (e) => {
     e.target.textContent = 'Заявка принята ✓';
   });
+  goTo('list');
 }
 
 function applyTheme(t) {
@@ -93,8 +94,10 @@ function applyTheme(t) {
 function wireTheme() {
   try {
     const saved = localStorage.getItem('theme');
-    if (saved) applyTheme(saved);
-  } catch (e) {}
+    applyTheme(saved || 'light');
+  } catch (e) {
+    applyTheme('light');
+  }
 
   document.getElementById('themeToggle').addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme') ||
